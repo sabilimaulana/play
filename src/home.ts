@@ -17,7 +17,7 @@ export const mountHome = (main: HTMLElement) => {
       <figure class="hero-art">${arcadeScene()}<figcaption>Your browser’s favorite hangout.</figcaption></figure>
     </section>
     <section class="games" id="games" aria-labelledby="games-title">
-      <div class="games-heading"><h2 id="games-title">Pick your next obsession</h2><p>Five games. Always room for one more.</p></div>
+      <div class="games-heading"><h2 id="games-title">Pick your next obsession</h2><p>Six games. Always room for one more.</p></div>
       <div class="shelf"></div>
     </section>
     <section class="home-invite" aria-label="How to play together">
@@ -31,7 +31,8 @@ export const mountHome = (main: HTMLElement) => {
     poker: "Big bluffs. Play chips.",
     checkers: "Think ahead. Take the crown.",
     sudoku: "A quiet puzzle. Or a friendly race.",
-    circccle: "Start small. Eat everything."
+    circccle: "Start small. Eat everything.",
+    ceki: "Seven cards. Meld them all, close first."
   }
   const shelf = main.querySelector(".shelf")!
   for (const game of GAMES) {

@@ -40,6 +40,9 @@ export function gameCover(type: string) {
   } else if(type==='sudoku') {
     b+=`<g transform="translate(84 22) rotate(${soft ? '9' : '0'} 80 80)">${rect(5,7,158,167,'shadow',r)}${rect(0,0,158,167,soft?'white':'purple-deep',r)}`;
     for(let i=0;i<16;i++){let x=8+i%4*37,y=9+Math.floor(i/4)*37;b+=rect(x,y,33,33,i===9?'yellow':soft?'paper':'well',soft?3:0);if(![2,5,9,14].includes(i))b+=`<text x="${x+16}" y="${y+26}" fill="${color(soft?'dark':'white')}" text-anchor="middle" font-family="var(--font-display)" font-size="27">${[5,3,0,7,6,0,1,9,8,0,2,4,3,6,0,8][i]}</text>`;} b+='</g>';
+  } else if(type==='ceki') {
+    const card = (x: number, y: number, deg: number, ink: string, rank: string, pip: string) => `<g transform="translate(${x} ${y}) rotate(${deg} 40 60)">${rect(3,6,80,120,'shadow',r)}${rect(0,0,80,120,'white',r)}<text x="11" y="29" fill="${color(ink)}" font-size="24" font-family="var(--font-body)" font-weight="800">${rank}</text><text x="40" y="88" text-anchor="middle" fill="${color(ink)}" font-size="50">${pip}</text></g>`;
+    b+=card(62,42,-20,'red','7','♥')+card(130,30,0,'red','8','♥')+card(198,42,20,'dark','★','★');
   } else {
     b+=circle(147,116,66,'shadow')+circle(147,105,66,'red')+circle(228,63,33,'blue')+circle(272,160,23,'green');
     b+=circle(126,83,10,'white')+circle(163,83,10,'white')+circle(129,85,4,'dark')+circle(166,85,4,'dark');

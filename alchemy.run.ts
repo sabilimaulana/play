@@ -1,7 +1,7 @@
 import * as Alchemy from "alchemy"
 import * as Cloudflare from "alchemy/Cloudflare"
 import { Effect } from "effect"
-import type { CheckersRoom, CircccleRoom, PokerRoom, SudokuRoom, TicTacToeRoom } from "./src/worker.ts"
+import type { CekiRoom, CheckersRoom, CircccleRoom, PokerRoom, SudokuRoom, TicTacToeRoom } from "./src/worker.ts"
 
 export type WorkerEnv = Cloudflare.InferEnv<typeof Play>
 
@@ -13,7 +13,8 @@ export const Play = Cloudflare.Worker("Play", {
     POKER: Cloudflare.DurableObject<PokerRoom>("PokerRoom"),
     CHECKERS: Cloudflare.DurableObject<CheckersRoom>("CheckersRoom"),
     SUDOKU: Cloudflare.DurableObject<SudokuRoom>("SudokuRoom"),
-    CIRCCCLE: Cloudflare.DurableObject<CircccleRoom>("CircccleRoom")
+    CIRCCCLE: Cloudflare.DurableObject<CircccleRoom>("CircccleRoom"),
+    CEKI: Cloudflare.DurableObject<CekiRoom>("CekiRoom")
   },
   assets: {
     directory: "./dist",

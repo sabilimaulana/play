@@ -6,9 +6,10 @@ import * as TicTacToe from "./tictactoe/logic.ts"
 import * as Checkers from "./checkers/logic.ts"
 import * as Sudoku from "./sudoku/logic.ts"
 import * as Circccle from "./circccle/logic.ts"
+import * as Ceki from "./ceki/logic.ts"
 import { avatarOf } from "./avatar.ts"
 
-const ROUTE = /^\/api\/(tictactoe|poker|checkers|sudoku|circccle)\/([a-z0-9]{4,32})\/ws$/
+const ROUTE = /^\/api\/(tictactoe|poker|checkers|sudoku|circccle|ceki)\/([a-z0-9]{4,32})\/ws$/
 const PID = /^[a-z0-9]{8,40}$/ // computer players use ids this can't match ("bot", "bot-1")
 /** Computer players "think" this long before moving. */
 const BOT_MS = 900
@@ -18,7 +19,7 @@ export default {
     const [, game, room] = new URL(request.url).pathname.match(ROUTE) ?? []
     if (!game || !room) return new Response("Not found", { status: 404 })
     if (request.headers.get("Upgrade") !== "websocket") return new Response("Expected websocket", { status: 426 })
-    const ns = game === "poker" ? env.POKER : game === "checkers" ? env.CHECKERS : game === "sudoku" ? env.SUDOKU : game === "circccle" ? env.CIRCCCLE : env.TICTACTOE
+    const ns = game === "poker" ? env.POKER : game === "checkers" ? env.CHECKERS : game === "sudoku" ? env.SUDOKU : game === "circccle" ? env.CIRCCCLE : game === "ceki" ? env.CEKI : env.TICTACTOE
     return ns.getByName(room).fetch(request)
   }
 }
@@ -184,8 +185,7 @@ export class TicTacToeRoom extends Room<TicTacToe.Game> {
   }
 }
 
-const shuffle = (): string[] => {
-  const deck = fullDeck()
+const shuffle = (deck = fullDeck()): string[] => {
   const r = crypto.getRandomValues(new Uint32Array(deck.length))
   for (let i = deck.length - 1; i > 0; i--) {
     const j = r[i]! % (i + 1)
@@ -203,7 +203,7 @@ export class PokerRoom extends Room<Poker.Table> {
   }
   protected act(t: Poker.Table, pid: string, raw: string, online: ReadonlySet<string>) {
     const action = Poker.parseAction(raw)
-    return action ? Poker.apply(t, pid, action, online, shuffle) : "bad message"
+    return action ? Poker.apply(t, pid, action, online, () => shuffle()) : "bad message"
   }
   protected override settle(t: Poker.Table, online: ReadonlySet<string>) {
     return Poker.settle(t, online)
@@ -226,6 +226,41 @@ export class PokerRoom extends Room<Poker.Table> {
   }
   protected override botAct(t: Poker.Table, online: ReadonlySet<string>) {
     return Poker.botAct(t, online, Math.random)
+  }
+}
+
+export class CekiRoom extends Room<Ceki.Game> {
+  protected init() {
+    return Ceki.newGame()
+  }
+  protected join(g: Ceki.Game) {
+    return g // seating is an explicit "sit" with a name
+  }
+  protected act(g: Ceki.Game, pid: string, raw: string, online: ReadonlySet<string>) {
+    const action = Ceki.parseAction(raw)
+    return action ? Ceki.apply(g, pid, action, online, () => shuffle(Ceki.fullDeck())) : "bad message"
+  }
+  protected override settle(g: Ceki.Game, online: ReadonlySet<string>) {
+    return Ceki.settle(g, online)
+  }
+  protected view(g: Ceki.Game, pid: string, online: ReadonlySet<string>) {
+    return Ceki.view(g, pid, online)
+  }
+  protected override turn(g: Ceki.Game) {
+    const key = Ceki.turnKey(g)
+    return key ? { key, ms: Ceki.TURN_MS } : null
+  }
+  protected override timeout(g: Ceki.Game) {
+    return Ceki.botAct(g)
+  }
+  protected override bots(g: Ceki.Game) {
+    return g.seats.map((s) => s.pid).filter(Ceki.isBot)
+  }
+  protected override botTurn(g: Ceki.Game) {
+    return Ceki.turnKey(g) !== null && Ceki.isBot(g.seats[g.turn]!.pid)
+  }
+  protected override botAct(g: Ceki.Game) {
+    return Ceki.botAct(g)
   }
 }
 

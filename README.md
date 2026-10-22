@@ -4,8 +4,8 @@ Pixel-art multiplayer browser games. No accounts: create a room, share the link.
 
 - `src/worker.ts`: Worker; `Room<S>` base = one Durable Object per room (`/api/<game>/<room>/ws`), server-authoritative
 - `src/<game>/logic.ts`: pure rules (+ `logic.test.ts`); `src/<game>/client.ts`: Pixi + bevy-ts ECS client
-- games: `tictactoe` (2p), `poker` (no-limit hold'em, 2-9p, play chips, blinds 10/20; busted or 3x timed-out players leave after the hand, 8s result pause, emotes, premoves, hide-cards toggle, last 20 hands as still tables in a history dialog), `checkers` (American rules, 2p), `sudoku` (1-2p race on the same puzzle, easy/medium/hard), `circccle` (real-time eat-and-grow with split/eject, 1-20p + computer players, shared `/circccle/global` room or private rooms; `CircccleRoom` ticks in memory at 20Hz instead of using `Room<S>`)
-- solo play: server-side computer players (`Room.bots/botTurn/botAct`, move after `BOT_MS`); tic tac toe minimax w/ 20% blunders, checkers 4-ply search, poker Monte Carlo equity
+- games: `tictactoe` (2p), `ceki` (Indonesian 7-card remi, 2-4p, 52 cards + 4 jokers, running scores; rules in `docs/ceki-rules.md` §9), `poker` (no-limit hold'em, 2-9p, play chips, blinds 10/20; busted or 3x timed-out players leave after the hand, 8s result pause, emotes, premoves, hide-cards toggle, last 20 hands as still tables in a history dialog), `checkers` (American rules, 2p), `sudoku` (1-2p race on the same puzzle, easy/medium/hard), `circccle` (real-time eat-and-grow with split/eject, 1-20p + computer players, shared `/circccle/global` room or private rooms; `CircccleRoom` ticks in memory at 20Hz instead of using `Room<S>`)
+- solo play: server-side computer players (`Room.bots/botTurn/botAct`, move after `BOT_MS`); tic tac toe minimax w/ 20% blunders, ceki greedy one-turn lookahead, checkers 4-ply search, poker Monte Carlo equity
 - `src/net.ts`: shared room socket, player id, invite box
 - `vendor/bevy-ts`: vendored ECS (see `VENDOR.md`)
 - `e2e/*.e2e.ts`: Playwright, real browsers against the real Worker + DOs; multiplayer = two browser contexts (`friend` fixture)

@@ -101,8 +101,16 @@ const glyph = (g: ReadonlyArray<string>, ox: number, oy: number, x: number, y: n
   return turned ? inked(g, ox, oy, 2 * ox + w - 1 - x, 2 * oy + h - 1 - y, k) : inked(g, ox, oy, x, y, k)
 }
 
-const face = (c: Card) => {
+// Ceki's jokers ("Xs", "Xh", ...): a star, red for hearts/diamonds and dark for spades/clubs, like a real deck.
+const STAR = ["...#...", "...#...", "#######", ".#####.", "..###..", ".##.##.", "##...##"]
+const jokerColor = (s: string) => (s === "h" || s === "d" ? S.red : S.navy)
+
+/** Full-size card face, 48x64 with shadow. */
+export const face = (c: Card) => {
   const [r, s] = [c[0]!, c[1]!]
+  if (r === "X")
+    return card(FW, FH, (x, y) =>
+      glyph(STAR, 3, 3, x, y, 1) || glyph(STAR, 3, 3, FW - 1 - x, FH - 1 - y, 1) || glyph(STAR, 10, 18, x, y, 4) ? jokerColor(s) : paper(FW, FH, x, y), 2)
   const rank = RANK_GLYPHS[r]!
   const suit = SUIT_GLYPHS[s]!
   const color = SUIT_COLOR[s]!
@@ -134,8 +142,9 @@ const face = (c: Card) => {
 }
 
 /** 24x32 card for opponents' fanned hands: just the corner index, which the fan leaves visible. */
-const mini = (c: Card | null) => {
+export const mini = (c: Card | null) => {
   if (!c) return card(24, 32, (x, y) => backPattern(24, 32, x, y))
+  if (c[0] === "X") return card(24, 32, (x, y) => (glyph(STAR, 5, 9, x, y, 2) ? jokerColor(c[1]!) : paper(24, 32, x, y)))
   const rank = RANK_GLYPHS[c[0]!]!
   const rw = rank[0]!.length * 2
   const rx = c[0] === "T" ? 1 : 2
@@ -152,7 +161,7 @@ const backPattern = (w: number, h: number, x: number, y: number) => {
   if (d < w / 6 + 1) return S.ink
   return (x + y) % 6 === 0 || (x - y + 120) % 6 === 0 ? S.lavender : S.slate
 }
-const back = () => card(FW, FH, (x, y) => backPattern(FW, FH, x, y), 2)
+export const back = () => card(FW, FH, (x, y) => backPattern(FW, FH, x, y), 2)
 
 // Chips: seen from straight above, like real chips tossed on felt. Hand-placed 13x13 sprite: ink outline,
 // chip colour, eight white rim marks and a white inner ring. Several chips fall in a loose overlapping pile.

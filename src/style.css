@@ -384,6 +384,52 @@ picture source { display: none; }
 .levels { display: flex; gap: var(--space-2xs); }
 .levels [aria-pressed="true"] { color: var(--color-accent-ink); background: var(--color-accent); }
 
+/* Ceki — a DOM card table: opponents on top, stock + discards in the middle, your hand below. */
+.ceki { display: grid; gap: var(--space-md); width: 100%; }
+.ck-seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
+.ck-seat { display: grid; gap: var(--space-2xs); align-content: start; padding: var(--space-xs); border: 1px solid var(--color-panel-edge); border-radius: var(--radius-panel); background: var(--color-panel); min-width: 0; }
+.ck-seat.is-turn { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-accent); }
+.ck-seat.is-away { opacity: .6; }
+.ck-seat-head { display: flex; align-items: center; gap: var(--space-2xs); min-width: 0; }
+.ck-seat-head .avatar { width: 32px; height: 32px; border-radius: 4px; image-rendering: pixelated; }
+.ck-seat-label { display: grid; min-width: 0; flex: 1; }
+.ck-score { font-size: var(--text-2xs); color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+.ck-dealer { font: 600 var(--text-2xs)/1 var(--font-body); padding: 3px 6px; border-radius: 50%; color: var(--color-dark); background: var(--color-yellow); }
+.ck-away { font-size: var(--text-2xs); color: var(--color-ink-2); }
+.ck-fan { display: flex; }
+.ck-fan .ck-mini + .ck-mini { margin-left: -16px; }
+.ck-melds { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.ck-meld { display: flex; padding: 2px; border-radius: 4px; background: color-mix(in oklch, var(--color-ok) 25%, transparent); }
+.ck-melds.is-dead .ck-meld { background: color-mix(in oklch, var(--color-bad) 25%, transparent); }
+.ck-meld .ck-mini + .ck-mini { margin-left: -8px; }
+.ck-mini { width: 24px; height: 32px; image-rendering: pixelated; }
+.ck-face { width: clamp(42px, 9vw, 64px); height: auto; aspect-ratio: 50 / 66; image-rendering: pixelated; display: block; }
+.ck-middle { display: flex; align-items: center; justify-content: center; gap: var(--space-lg); padding: var(--space-md); border-radius: var(--radius-panel); background: var(--color-felt); min-height: 8rem; }
+.ck-stock, .ck-discard, .ck-card { position: relative; padding: 0; border: 0; background: none; cursor: pointer; touch-action: manipulation; transition: transform var(--dur-short) var(--ease-out); }
+.ck-stock:disabled, .ck-discard:disabled { cursor: default; opacity: 1; }
+.ck-stock:not(:disabled):hover, .ck-discard:not(:disabled):hover { transform: translateY(-4px); }
+.ck-stock:focus-visible, .ck-discard:focus-visible, .ck-card:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.ck-count { position: absolute; inset: auto 0 -1.4rem; text-align: center; font: 600 var(--text-xs)/1 var(--font-body); color: var(--color-white); }
+.ck-pile { display: flex; align-items: center; min-height: 5rem; }
+.ck-discard + .ck-discard { margin-left: clamp(-32px, -5vw, -22px); }
+.ck-discard.is-fit { transform: translateY(-8px); }
+.ck-discard.is-fit img { outline: 3px solid var(--color-accent); outline-offset: -1px; }
+.ck-buried, .ck-empty { margin-right: var(--space-2xs); font-size: var(--text-xs); color: var(--color-white); opacity: .8; }
+.ck-mine { display: grid; gap: var(--space-xs); }
+.ck-hand { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3xs); }
+.ck-card[aria-pressed="true"] { transform: translateY(-12px); }
+.ck-card[aria-pressed="true"] img { outline: 3px solid var(--color-accent); outline-offset: -1px; }
+.ck-card.is-new::after { content: "new"; position: absolute; top: -.9rem; left: 50%; translate: -50%; font: 600 var(--text-2xs)/1 var(--font-body); color: var(--color-accent); }
+.ck-results { display: grid; gap: var(--space-xs); }
+.ck-results[hidden] { display: none; }
+.ck-results-title { margin: 0; font-size: var(--text-sm); }
+.ck-rows { display: grid; gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
+.ck-row { display: grid; gap: var(--space-2xs); padding-top: var(--space-2xs); border-top: 1px solid var(--color-panel-edge); }
+.ck-row-head { display: flex; align-items: baseline; gap: var(--space-xs); margin: 0; }
+.ck-row-head .player-name { flex: 1; }
+.ck-delta { font: 600 var(--text-sm)/1 var(--font-body); color: var(--color-ok); font-variant-numeric: tabular-nums; }
+.ck-delta.is-minus { color: var(--color-bad); }
+
 /* Poker — table-first like every online client: pods on the rail, chips on the felt,
    action bar under the table. Sizes use container units so the table scales as one piece. */
 /* Sized to the viewport so status + table + action bar fit on one screen. */

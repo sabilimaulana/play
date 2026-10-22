@@ -1,7 +1,7 @@
 # Design — Pocket Arcade
 
 Selected by the user from the three working design proposals on 22 October 2026.
-This is the shared system for the library and all five multiplayer games.
+This is the shared system for the library and all six multiplayer games.
 
 ## Intent
 

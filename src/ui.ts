@@ -39,7 +39,8 @@ export const GAMES = [
   { slug: "poker", name: "Poker", players: "2–9 players" },
   { slug: "checkers", name: "Checkers", players: "2 players" },
   { slug: "sudoku", name: "Sudoku", players: "1–2 players" },
-  { slug: "circccle", name: "Circccle", players: "1–20 players" }
+  { slug: "circccle", name: "Circccle", players: "1–20 players" },
+  { slug: "ceki", name: "Ceki", players: "2–4 players" }
 ] as const
 
 /** Header + <main> + footer. Returns <main>. */

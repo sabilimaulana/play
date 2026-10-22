@@ -4,8 +4,8 @@ test("home lists every game and opens a fresh room", async ({ page, shot }) => {
   await page.goto("/")
   await expect(page.getByRole("heading", { name: /Small games.*Great company/ })).toBeVisible()
   const cards = page.locator(".cabinet")
-  await expect(cards).toHaveCount(5)
-  for (const name of ["Tic Tac Toe", "Poker", "Checkers", "Sudoku", "Circccle"])
+  await expect(cards).toHaveCount(6)
+  for (const name of ["Tic Tac Toe", "Poker", "Checkers", "Sudoku", "Circccle", "Ceki"])
     await expect(page.getByRole("heading", { name, exact: true })).toBeVisible()
   await shot(page, "home")
 
@@ -18,5 +18,5 @@ test("home lists every game and opens a fresh room", async ({ page, shot }) => {
 
 test("unknown paths fall back to home", async ({ page }) => {
   await page.goto("/nope/x")
-  await expect(page.locator(".cabinet")).toHaveCount(5)
+  await expect(page.locator(".cabinet")).toHaveCount(6)
 })

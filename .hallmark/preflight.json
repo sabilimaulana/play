@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-22",
+  "framework": "Vite + TypeScript + Pixi, Cloudflare multiplayer backend",
+  "system": "Pocket Arcade; user selected candidate A",
+  "fonts": [
+    "Jersey 10",
+    "Manrope"
+  ],
+  "tokens": "tokens.css",
+  "art": "src/paint.ts + src/arcade-art.ts",
+  "motion": "existing canvas motion + CSS transforms; reduced-motion supported"
+}

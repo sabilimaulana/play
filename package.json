@@ -1,0 +1,37 @@
+{
+  "name": "play",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261014.1",
+    "@effect/platform-bun": "4.0.2",
+    "@effect/platform-node": "4.0.2",
+    "@playwright/test": "^1.64.1",
+    "@types/bun": "^1.4.3",
+    "alchemy": "2.0.0-beta.83",
+    "effect": "4.0.2",
+    "typescript": "5.9",
+    "vite": "8"
+  },
+  "dependencies": {
+    "@pixabots/core": "0.5.0",
+    "@typeonce/bevy-ts": "workspace:*",
+    "@typeonce/bevy-ts-browser": "workspace:*",
+    "@typeonce/bevy-ts-pixi": "workspace:*",
+    "@typeonce/bevy-ts-render": "workspace:*",
+    "pixi.js": "8"
+  },
+  "workspaces": [
+    "vendor/bevy-ts/*"
+  ],
+  "scripts": {
+    "dev": "alchemy dev --stage local",
+    "web": "vite",
+    "build": "vite build",
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.worker.json && bun test",
+    "plan": "vite build && alchemy plan --stage prod",
+    "deploy": "vite build && alchemy deploy --stage prod --yes",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report"
+  }
+}

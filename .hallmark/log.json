@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2026-10-22",
+    "scope": "app",
+    "macrostructure": "Ecosystem Index (library) + Workbench (rooms)",
+    "theme": "Pocket Arcade",
+    "theme_axes": "dark / pixel display + humanist body / mint",
+    "enrichment": "Native isometric SVG arcade + custom game sprites",
+    "brief": "User selected Pocket Arcade from three prototypes; apply across library and all five real multiplayer games."
+  },
+  {
+    "date": "2026-10-14",
+    "scope": "app",
+    "macrostructure": "Marquee Hero (home) + Workbench (rooms)",
+    "theme": "custom",
+    "theme_axes": "dark / display-heavy (pixel) / warm",
+    "vibe": "pixel arcade, late-night, warm CRT",
+    "enrichment": "Tier-B hand-built pixel art (canvas)",
+    "nav": "N7 slab",
+    "footer": "Ft5 statement",
+    "brief": "play.sblsblsbl.club \u00b7 multiplayer pixel games hub (tic tac toe, poker)"
+  }
+]

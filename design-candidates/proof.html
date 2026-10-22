@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLAY — visual direction comparison</title>
+  <link rel="stylesheet" href="./fonts.css">
+  <style>
+    :root{--paper:oklch(96% .012 283);--ink:oklch(25% .03 283);--muted:oklch(46% .035 283);--rule:oklch(84% .025 283);--accent:oklch(45% .15 280)}
+    *{box-sizing:border-box}body{margin:0;padding:40px;background:var(--paper);color:var(--ink);font:14px/1.5 'Manrope',sans-serif}header{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:32px}h1{font:800 38px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-1px;margin:0}header p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}h2{font:800 25px/1.2 'Bricolage Grotesque',sans-serif;margin:0 0 8px}h2 span{font:700 12px 'Manrope',sans-serif;color:var(--accent);padding-left:8px}.description{font-size:13px;color:var(--muted);min-height:44px;margin:0 0 20px}img{display:block;width:100%;border:1px solid var(--rule)}.caption{font-size:12px;color:var(--muted);margin:18px 0 10px}footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--rule);color:var(--muted);font-size:12px}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}@media(max-width:700px){body{padding:24px}header{display:block}header p{margin-top:12px}.grid{grid-template-columns:minmax(0,1fr);gap:36px}.description{min-height:0}}
+  </style>
+</head>
+<body>
+  <header><h1>Three ways to play.</h1><p>Real browser captures · Library + game room · October 2026</p></header>
+  <main class="grid">
+    <article><h2>A. Pocket Arcade <span>Recommended</span></h2><p class="description">A miniature pixel hangout. Indigo, mint, and an illustrated arcade full of character.</p><a href="./?direction=pocket"><img src="./screenshots/pocket-desktop.png" alt="Pocket Arcade library screenshot"></a><p class="caption">Inside the game room</p><a href="./?direction=pocket&view=room"><img src="./screenshots/pocket-room.png" alt="Pocket Arcade game room screenshot"></a></article>
+    <article><h2>B. Playroom</h2><p class="description">Bright, tactile, and friendly. Lilac surfaces, chunky game pieces, and bold typography.</p><a href="./?direction=playroom"><img src="./screenshots/playroom-desktop.png" alt="Playroom library screenshot"></a><p class="caption">Inside the game room</p><a href="./?direction=playroom&view=room"><img src="./screenshots/playroom-room.png" alt="Playroom game room screenshot"></a></article>
+    <article><h2>C. After Hours</h2><p class="description">A late-night games lounge. Oxblood, brass, green felt, and a seat at the table.</p><a href="./?direction=afterhours"><img src="./screenshots/afterhours-desktop.png" alt="After Hours library screenshot"></a><p class="caption">Inside the game room</p><a href="./?direction=afterhours&view=room"><img src="./screenshots/afterhours-room.png" alt="After Hours game room screenshot"></a></article>
+  </main>
+  <footer>Interactive design proposals. All three include desktop and mobile layouts, keyboard play, win / draw states, and reduced-motion support. The full app redesign follows the selected direction.</footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* Hallmark · three proposed systems · no production system changes */
+:root {
+  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Jersey 10', monospace;
+  --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px; --space-xl: 48px; --space-2xl: 64px;
+  --text-sm: 14px; --text-base: 16px; --text-lg: 20px; --text-title: 32px;
+  --ease-out: cubic-bezier(.16,1,.3,1); --ease-in: cubic-bezier(.7,0,.84,0); --ease-in-out: cubic-bezier(.65,0,.35,1);
+  --dur-press: 100ms; --radius-card: 12px;
+  --color-paper: oklch(21% .045 282); --color-panel: oklch(26% .052 282); --color-well: oklch(17% .038 282);
+  --color-ink: oklch(96% .016 86); --color-muted: oklch(75% .039 286); --color-rule: oklch(36% .05 282);
+  --color-accent: oklch(88% .14 155); --color-accent-ink: oklch(22% .045 282); --color-focus: oklch(87% .11 207);
+  --color-purple: oklch(74% .135 294); --color-purple-deep: oklch(45% .09 288); --color-yellow: oklch(88% .15 87);
+  --color-red: oklch(72% .17 25); --color-blue: oklch(76% .12 232); --color-green: oklch(78% .13 165);
+  --color-white: oklch(97% .014 90); --color-dark: oklch(19% .035 280); --color-felt: oklch(37% .06 169);
+  --color-shadow: oklch(12% .028 280 / .55); --color-pink: oklch(81% .10 355);
+}
+[data-direction="playroom"] {
+  color-scheme: light; --font-display: 'Bricolage Grotesque', sans-serif;
+  --color-paper: oklch(96% .018 291); --color-panel: oklch(99% .007 291); --color-well: oklch(92% .027 291);
+  --color-ink: oklch(27% .057 286); --color-muted: oklch(47% .04 286); --color-rule: oklch(84% .035 291);
+  --color-accent: oklch(49% .19 281); --color-accent-ink: oklch(98% .009 290); --color-focus: oklch(49% .19 281);
+  --color-shadow: oklch(35% .07 281 / .12); --radius-card: 24px;
+}
+[data-direction="afterhours"] {
+  color-scheme: dark; --font-display: 'Space Grotesk', sans-serif;
+  --color-paper: oklch(19% .025 14); --color-panel: oklch(24% .03 14); --color-well: oklch(16% .02 14);
+  --color-ink: oklch(94% .025 83); --color-muted: oklch(73% .037 48); --color-rule: oklch(35% .033 20);
+  --color-accent: oklch(83% .12 74); --color-accent-ink: oklch(20% .025 14); --color-focus: oklch(83% .12 74);
+  --color-shadow: oklch(9% .01 14 / .6); --radius-card: 4px;
+}

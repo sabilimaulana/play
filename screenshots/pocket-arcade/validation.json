@@ -1,0 +1,262 @@
+{
+  "base": "http://localhost:8787",
+  "checks": [
+    {
+      "game": "home",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 1440,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 1024,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 768,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "home",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "tictactoe",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "checkers",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "sudoku",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "poker",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 390,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 375,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 320,
+      "documentFits": true,
+      "overflow": []
+    },
+    {
+      "game": "circccle",
+      "width": 414,
+      "documentFits": true,
+      "overflow": []
+    }
+  ],
+  "issues": [],
+  "menu": "pass",
+  "clipboard": "pass",
+  "soundPreference": "pass",
+  "reducedMotion": "pass"
+}

@@ -1,0 +1,65 @@
+/* Hallmark · theme: Pocket Arcade · genre: playful · design-system: design.md
+ * macrostructure: Ecosystem Index (library) + Workbench (rooms)
+ * display: Jersey 10 · body: Manrope · anchor: mint on indigo
+ */
+:root {
+  color-scheme: dark;
+  --color-void: oklch(17% .038 282);
+  --color-paper: oklch(21% .045 282);
+  --color-paper-2: oklch(26% .052 282);
+  --color-paper-3: oklch(35% .055 282);
+  --color-ink: oklch(96% .016 86);
+  --color-ink-2: oklch(75% .039 286);
+  --color-accent: oklch(88% .14 155);
+  --color-accent-ink: oklch(22% .045 282);
+  --color-focus: oklch(87% .11 207);
+  --color-x: oklch(72% .17 25);
+  --color-o: oklch(76% .12 232);
+  --color-ok: var(--color-accent);
+  --color-bad: oklch(73% .16 20);
+  --color-felt: oklch(37% .06 169);
+  --color-panel-edge: oklch(36% .05 282);
+  --color-purple: oklch(74% .135 294);
+  --color-purple-deep: oklch(45% .09 288);
+  --color-yellow: oklch(88% .15 87);
+  --color-red: var(--color-x);
+  --color-blue: var(--color-o);
+  --color-green: oklch(78% .13 165);
+  --color-white: oklch(97% .014 90);
+  --color-dark: oklch(19% .035 280);
+  --color-pink: oklch(81% .10 355);
+  --color-shadow: oklch(12% .028 280 / .55);
+  --color-backdrop: oklch(12% .028 280 / .86);
+  /* Illustration roles share the same palette as the interface. */
+  --color-panel: var(--color-paper-2);
+  --color-well: var(--color-void);
+  --color-muted: var(--color-ink-2);
+  --color-rule: var(--color-panel-edge);
+  --font-display: "Jersey 10", ui-monospace, monospace;
+  --font-body: "Manrope", ui-sans-serif, sans-serif;
+  --text-2xs: .75rem;
+  --text-xs: .8125rem;
+  --text-sm: .9375rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-display-s: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  --text-display: clamp(3.5rem, 4.8vw + 1rem, 5rem);
+  --space-3xs: .25rem;
+  --space-2xs: .5rem;
+  --space-xs: .75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --rule: 1px;
+  --rule-board: 3px;
+  --shadow-step: 3px;
+  --radius: 5px;
+  --radius-panel: 12px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.7, 0, .84, 0);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-press: 100ms;
+  --dur-short: 160ms;
+}

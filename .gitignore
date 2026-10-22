@@ -1,0 +1,8 @@
+node_modules
+dist
+.alchemy
+.env*
+test-results
+playwright-report
+test-results-prod
+playwright-report-prod

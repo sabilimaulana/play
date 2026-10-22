@@ -413,6 +413,16 @@ main { padding-block: var(--space-lg) var(--space-xl); }
 .my-hand-hold .fine { color: var(--color-ink-2); line-height: 1.4; }
 .my-hand-name { font: 400 28px/1.1 var(--font-display); color: var(--color-accent); overflow-wrap: anywhere; }
 .my-hand .btn { flex: 0 0 auto; }
+/* Hallmark · component: hide-cards toggle · genre: playful · theme: Pocket Arcade (design.md)
+ * states: default · hover · focus (global ring) · active · pressed = cards hidden · disabled n/a (always available)
+ * loading/error/success n/a: a local toggle with instant result */
+.felt-hud { position: absolute; inset: 0; pointer-events: none; container-type: inline-size; }
+.peek { position: absolute; display: grid; place-items: center; width: max(30px, 6cqw); aspect-ratio: 1; padding: 0; transform: translate(-50%, -50%); pointer-events: auto; color: var(--color-ink-2); background: var(--color-void); border: 1px solid var(--color-panel-edge); border-radius: var(--radius); cursor: pointer; transition: transform var(--dur-press) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.peek svg { width: 70%; }
+.peek[hidden] { display: none; }
+.peek:hover { color: var(--color-ink); border-color: var(--color-ink-2); transform: translate(-50%, calc(-50% - 2px)); }
+.peek:active { transform: translate(-50%, calc(-50% + 1px)); }
+.peek[aria-pressed="true"] { color: var(--color-accent-ink); background: var(--color-accent); border-color: var(--color-void); }
 .console .act-buttons { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-2xs); }
 .console .act-buttons .btn { padding-inline: var(--space-2xs); }
 .console .taunts { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-3xs); padding-top: var(--space-sm); border-top: 1px solid var(--color-panel-edge); }
@@ -455,6 +465,8 @@ main { padding-block: var(--space-lg) var(--space-xl); }
   html { scroll-behavior: auto; }
   .btn, .cabinet-screen .game-art { transition: none; }
   .btn:hover, .cabinet-screen:hover .game-art { transform: none; }
+  .peek { transition: none; }
+  .peek:hover { transform: translate(-50%, -50%); }
   .confetti, .pod-emote, .pod-tag.is-hand, .status.shake { animation: none; }
   .confetti { display: none; }
 }

@@ -45,6 +45,34 @@ const SPOTS_FOR: Record<number, ReadonlyArray<number>> = {
   9: [0, 1, 2, 8, 9, 10, 11, 6, 7]
 }
 const POT: Pt = { x: CX, y: 108 }
+// The hide toggle sits on the lower-right corner of your second card (card edge = +26 offset + 24 half-width).
+const PEEK: Pt = { x: SPOTS[0]!.cards.x + 60, y: SPOTS[0]!.cards.y + 16 }
+
+/** 16x16 pixel icon as an SVG path ("#" = filled). */
+const pixelIcon = (rows: ReadonlyArray<string>) =>
+  `<svg viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="${rows
+    .flatMap((row, y) => [...row].flatMap((c, x) => (c === "#" ? [`M${x} ${y + 3}h1v1h-1z`] : [])))
+    .join("")}"/></svg>`
+const EYE_OPEN = pixelIcon([
+  ".....######.....",
+  "...##......##...",
+  "..#....##....#..",
+  ".#....####....#.",
+  ".#....####....#.",
+  "..#....##....#..",
+  "...##......##...",
+  ".....######....."
+])
+const EYE_SHUT = pixelIcon([
+  "",
+  "",
+  ".#............#.",
+  "..##........##..",
+  "....########....",
+  "...#..#..#..#...",
+  "..#...#..#...#..",
+  ""
+])
 
 const spotOf = (i: number, v: View): Spot => {
   const n = v.seats.length
@@ -300,9 +328,10 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
   const fx = el("div", "fx")
   felt.append(fx)
 
-  // Your hand so far + the hide toggle, and the taunt bar: updated every view, never rebuilt mid-click.
-  const mine = el("div", "my-hand")
-  const eye = button("", () => {
+  // The hide toggle lives on the felt beside your cards, in its own layer so table re-renders keep its focus.
+  const eye = el("button", "peek")
+  eye.type = "button"
+  eye.onclick = () => {
     hidden = !hidden
     try {
       localStorage.setItem("poker-hide", hidden ? "1" : "0")
@@ -311,11 +340,19 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
       shown = mask(view)
       renderMine(view)
     }
-  }, "quiet")
+  }
+  eye.setAttribute("aria-label", "Hide my cards")
+  eye.title = "Hide my cards"
+  const hud = el("div", "felt-hud")
+  hud.append(at(eye, PEEK))
+  felt.append(hud)
+
+  // Your hand so far and the taunt bar: updated every view, never rebuilt mid-click.
+  const mine = el("div", "my-hand")
   const strength = el("span", "my-hand-name")
   const hold = el("p", "my-hand-hold")
   hold.append(el("span", "fine", "Your hand"), strength)
-  mine.append(hold, eye)
+  mine.append(hold)
   const taunts = el("div", "taunts")
   taunts.setAttribute("aria-label", "Taunt")
   for (const e of EMOTES) {
@@ -569,7 +606,8 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
     const cards = me?.cards.filter((c): c is Card => !!c) ?? []
     mine.hidden = cards.length === 0
     taunts.hidden = !me
-    eye.textContent = hidden ? "Show cards" : "Hide cards"
+    eye.hidden = cards.length === 0
+    eye.innerHTML = hidden ? EYE_SHUT : EYE_OPEN
     eye.setAttribute("aria-pressed", `${hidden}`)
     strength.textContent = hidden ? "Cards hidden" : me?.folded ? "Folded" : handName([...cards, ...v.board])
   }

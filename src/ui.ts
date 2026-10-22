@@ -212,9 +212,31 @@ export const roomLayout = (main: HTMLElement, title: string, room: string, varia
   }
 }
 
+/** A quiet button that opens a modal sheet, so occasional extras don't crowd the side panel. */
+export const sheet = (label: string, title: string, onOpen?: () => void) => {
+  const dialog = el("dialog", "sheet")
+  dialog.setAttribute("aria-label", title)
+  const close = el("button", "btn btn--quiet", "Close")
+  close.type = "button"
+  close.onclick = () => dialog.close()
+  const head = el("div", "sheet-top")
+  head.append(el("h2", "sheet-title", title), close)
+  const body = el("div", "sheet-body")
+  dialog.append(head, body)
+  dialog.onclick = (e) => e.target === dialog && dialog.close() // backdrop click
+  document.body.append(dialog)
+  const open = el("button", "btn btn--quiet", label)
+  open.type = "button"
+  open.onclick = () => {
+    dialog.showModal()
+    onOpen?.()
+  }
+  return { open, dialog, body }
+}
+
 /** Rules stay within reach without competing with the next move. */
-export const rulesPanel = (text: string): HTMLDetailsElement => {
-  const details = el("details", "game-rules")
-  details.append(el("summary", "", "How to play"), el("p", "fine", text))
-  return details
+export const rulesButton = (text: string): HTMLButtonElement => {
+  const { open, body } = sheet("How to play", "How to play")
+  body.append(el("p", "fine", text))
+  return open
 }

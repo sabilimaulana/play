@@ -2,7 +2,7 @@
 // Your own grid is local truth during a round; the server checks it and decides who finished first.
 import { connectRoom } from "../net.ts"
 import { play } from "../sfx.ts"
-import { avatarImg, el, rulesPanel, type RoomUI } from "../ui.ts"
+import { avatarImg, el, rulesButton, type RoomUI } from "../ui.ts"
 import { conflicts, LEVELS, type ClientMessage, type Level, type View } from "./logic.ts"
 
 const LEVEL_NAME: Record<Level, string> = { easy: "Easy", medium: "Medium", hard: "Hard" }
@@ -63,7 +63,7 @@ export const mountSudoku = (ui: RoomUI, room: string): void => {
   setup.append(el("p", "field-label", "Level"), levels, startBtn)
   const panel = el("section", "panel")
   panel.append(el("h2", "panel-title", "At the table"), players, clock, setup)
-  ui.side.append(panel, rulesPanel("Fill every row, column and box with 1–9. Race a friend on the same puzzle: first to finish wins. Alone, it's you against the clock."))
+  ui.side.append(panel, rulesButton("Fill every row, column and box with 1–9. Race a friend on the same puzzle: first to finish wins. Alone, it's you against the clock."))
   renderLevels()
 
   let view: View | null = null

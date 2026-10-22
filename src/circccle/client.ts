@@ -5,7 +5,7 @@ import { connectRoom } from "../net.ts"
 import { paint, ARCADE as S } from "../paint.ts"
 import { texture } from "../pixel.ts"
 import { play } from "../sfx.ts"
-import { avatarImg, el, rulesPanel, type RoomUI } from "../ui.ts"
+import { avatarImg, el, rulesButton, type RoomUI } from "../ui.ts"
 import { EJECT_MASS, GLOBAL_ROOM, radius, SIZE, START_MASS, type CellWire, type ClientMessage, type Roster, type ServerMessage } from "./logic.ts"
 
 const W = 320
@@ -107,7 +107,7 @@ export const mountCircccle = async (ui: RoomUI, room: string): Promise<void> => 
   const where = room === GLOBAL_ROOM
     ? el("p", "fine", "You're in the global arena: anyone can drop in. Want your own? Open a private room from the home page.")
     : el("p", "fine", "Private room: only people with this link can join.")
-  ui.side.append(panel, where, rulesPanel("Steer with the mouse, a finger, or the arrow keys. Eat dots to grow; eat circles 20% smaller than you. Split (Space) lunges half of each cell forward; pieces rejoin after 8 seconds. Eject (W) shoots out a bit of mass to feed a friend or bait a rival. Computer players join so you're never alone."))
+  ui.side.append(panel, where, rulesButton("Steer with the mouse, a finger, or the arrow keys. Eat dots to grow; eat circles 20% smaller than you. Split (Space) lunges half of each cell forward; pieces rejoin after 8 seconds. Eject (W) shoots out a bit of mass to feed a friend or bait a rival. Computer players join so you're never alone."))
 
   let me = 0
   let roster: Roster = {}

@@ -18,7 +18,11 @@ whose turn it is, and the next action immediately clear.
   controls, rules, and invite form a sidebar. While waiting, the invite has priority.
 - Mobile rooms: status, invitation when waiting, board, player/actions, then the
   compact invitation when playing. No horizontal document scrolling.
-- Poker follows the same system with a larger table and a dedicated action panel.
+- Poker variant (`data-variant="table"`): the table owns the left column, sized to the
+  viewport so every pod is visible without scrolling. The right column is one console:
+  status (with a full-width turn clock) on top, then your hand, bet sizing, Fold/Call/Raise,
+  and a single row of taunts. Rules, vote kick and hand history are quiet links under it;
+  the invite follows. On phones: table, console, extras; while waiting, the invite leads.
 
 ## Color and typography
 

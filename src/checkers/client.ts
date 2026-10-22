@@ -6,7 +6,7 @@ import { PixiNodeRegistry } from "@typeonce/bevy-ts-pixi"
 import { connectRoom } from "../net.ts"
 import { makeMotion, texture, type Motion } from "../pixel.ts"
 import { play } from "../sfx.ts"
-import { avatarImg, el, rulesPanel, type RoomUI } from "../ui.ts"
+import { avatarImg, el, rulesButton, type RoomUI } from "../ui.ts"
 import { checkersArt } from "./art.ts"
 import { other, sideOf, type ClientMessage, type Piece, type Side, type View } from "./logic.ts"
 
@@ -183,7 +183,7 @@ export const mountCheckers = async (ui: RoomUI, room: string): Promise<void> => 
   resign.hidden = rematch.hidden = vsBot.hidden = true
   const panel = el("section", "panel")
   panel.append(el("h2", "panel-title", "At the table"), players, score, rematch, resign, vsBot)
-  ui.side.append(panel, rulesPanel("American checkers: captures are mandatory, keep jumping while you can, reach the far row to crown a king."))
+  ui.side.append(panel, rulesButton("American checkers: captures are mandatory, keep jumping while you can, reach the far row to crown a king."))
 
   const app = new Application()
   await app.init({ width: SIZE, height: SIZE, backgroundAlpha: 0, antialias: false, roundPixels: true })

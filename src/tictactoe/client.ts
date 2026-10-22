@@ -6,7 +6,7 @@ import { PixiNodeRegistry } from "@typeonce/bevy-ts-pixi"
 import { connectRoom } from "../net.ts"
 import { play } from "../sfx.ts"
 import { makeMotion, texture, type Motion } from "../pixel.ts"
-import { avatarImg, el, rulesPanel, type RoomUI } from "../ui.ts"
+import { avatarImg, el, rulesButton, type RoomUI } from "../ui.ts"
 import { tttArt } from "./art.ts"
 import type { ClientMessage, Mark, View } from "./logic.ts"
 
@@ -160,7 +160,7 @@ export const mountTicTacToe = async (ui: RoomUI, room: string): Promise<void> =>
   const vsBot = el("button", "btn btn--quiet", "Play the computer")
   vsBot.type = "button"
   vsBot.hidden = true
-  const rules = rulesPanel("Three in a row wins. Whoever didn't start last round starts the next.")
+  const rules = rulesButton("Three in a row wins. Whoever didn't start last round starts the next.")
   const panel = el("section", "panel")
   panel.append(el("h2", "panel-title", "At the table"), players, score, rematch, vsBot)
   ui.side.append(panel, rules)

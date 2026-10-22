@@ -6,7 +6,7 @@ import { PixiNodeRegistry } from "@typeonce/bevy-ts-pixi"
 import { connectRoom } from "../net.ts"
 import { makeMotion, texture, type Motion } from "../pixel.ts"
 import { play, type Sound } from "../sfx.ts"
-import { avatarImg, el, rulesPanel, type RoomUI } from "../ui.ts"
+import { avatarImg, el, rulesButton, sheet, type RoomUI } from "../ui.ts"
 import { BOARD_Y, boardX, chipStack, pokerArt, TABLE_CX as CX, TABLE_H, TABLE_W } from "./art.ts"
 import { handName } from "./hand.ts"
 import { BIG_BLIND, EMOTES, IDLE_KICK, MAX_SEATS, SMALL_BLIND, START_CHIPS, TURN_MS, type Action, type Card, type RoundView, type View } from "./logic.ts"
@@ -313,7 +313,9 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
     }
   }, "quiet")
   const strength = el("span", "my-hand-name")
-  mine.append(eye, strength)
+  const hold = el("p", "my-hand-hold")
+  hold.append(el("span", "fine", "Your hand"), strength)
+  mine.append(hold, eye)
   const taunts = el("div", "taunts")
   taunts.setAttribute("aria-label", "Taunt")
   for (const e of EMOTES) {
@@ -327,25 +329,26 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
   }
   const controls = el("section", "actions")
   // Vote kick (CS/Valorant style): frees a seat held by someone who's gone; they can sit again.
+  const kick = sheet("Vote kick", "Vote kick")
   const kickRow = el("div", "kick")
+  kick.body.append(kickRow)
+  kick.open.hidden = true
   let kickKey = ""
   // Past hands, newest first, each frozen the way the table looked when it ended.
-  const openHistory = button("Hand history", () => {
-    dialog.showModal()
-    if (view) renderHistory(view)
-  }, "quiet")
+  const hands = sheet("Hand history", "Hand history", () => view && renderHistory(view))
+  const openHistory = hands.open
+  const dialog = hands.dialog
   openHistory.hidden = true
-  const dialog = el("dialog", "history")
-  dialog.setAttribute("aria-label", "Hand history")
   const historyList = el("ol", "history-list")
-  const close = button("Close", () => dialog.close(), "quiet")
-  const head = el("div", "history-top")
-  head.append(el("h2", "history-title", "Hand history"), close)
-  dialog.append(head, historyList)
-  dialog.onclick = (e) => e.target === dialog && dialog.close() // backdrop click
-  document.body.append(dialog)
+  hands.body.append(historyList)
   let historyKey = ""
-  ui.side.append(mine, controls, taunts, kickRow, openHistory, rulesPanel(`No-limit hold'em · blinds ${SMALL_BLIND}/${BIG_BLIND} · ${START_CHIPS} play chips each · up to ${MAX_SEATS} seats · time out ${IDLE_KICK} turns in a row or get voted off and you leave the table; sit again to get your chips back`))
+  const tools = el("div", "side-tools")
+  tools.append(rulesButton(`No-limit hold'em · blinds ${SMALL_BLIND}/${BIG_BLIND} · ${START_CHIPS} play chips each · up to ${MAX_SEATS} seats · time out ${IDLE_KICK} turns in a row or get voted off and you leave the table; sit again to get your chips back`), kick.open, openHistory)
+  // One console under the status: your hand, the decision, then the taunts. Extras sit below it.
+  const seat = el("section", "console")
+  seat.setAttribute("aria-label", "Your seat")
+  seat.append(mine, controls, taunts)
+  ui.side.append(seat, tools)
 
   let view: View | null = null
   let connected = false
@@ -481,8 +484,8 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
     const key = JSON.stringify([v.you, !!v.vote, others.map(({ s, i }) => [i, s.name, s.online])])
     if (key === kickKey) return
     kickKey = key
-    kickRow.hidden = v.you === null || !!v.vote || others.length === 0
-    if (kickRow.hidden) return
+    kick.open.hidden = v.you === null || !!v.vote || others.length === 0
+    if (kick.open.hidden) return kick.dialog.close()
     const pick = el("select", "field")
     pick.setAttribute("aria-label", "Player to vote off")
     for (const { s, i } of others) {
@@ -490,7 +493,10 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
       o.value = `${i}`
       pick.append(o)
     }
-    kickRow.replaceChildren(el("span", "fine", "Free a seat:"), pick, button("Vote kick", () => send({ t: "kick", seat: +pick.value }), "quiet"))
+    kickRow.replaceChildren(el("span", "fine", "Free a seat:"), pick, button("Vote kick", () => {
+      send({ t: "kick", seat: +pick.value })
+      kick.dialog.close()
+    }))
   }
 
   /** A past hand as the table drew it when the hand ended. */
@@ -565,7 +571,7 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
     taunts.hidden = !me
     eye.textContent = hidden ? "Show cards" : "Hide cards"
     eye.setAttribute("aria-pressed", `${hidden}`)
-    strength.textContent = hidden ? "Cards hidden" : me?.folded ? "Folded" : `You have: ${handName([...cards, ...v.board])}`
+    strength.textContent = hidden ? "Cards hidden" : me?.folded ? "Folded" : handName([...cards, ...v.board])
   }
 
   // Sound cues come from what changed between two server views.

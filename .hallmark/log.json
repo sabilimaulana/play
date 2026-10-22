@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-10-22",
+    "scope": "page",
+    "page": "poker room",
+    "macrostructure": "Workbench (table variant: table column + seat console)",
+    "theme": "Pocket Arcade",
+    "design_system": "design.md",
+    "enrichment": "none (existing pixel table art)",
+    "brief": "Redesign poker room: status merged into a right-hand console with hand, sizing, actions, taunts; table sized to viewport; extras as quiet links."
+  },
+  {
+    "date": "2026-10-22",
     "scope": "app",
     "macrostructure": "Ecosystem Index (library) + Workbench (rooms)",
     "theme": "Pocket Arcade",

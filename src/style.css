@@ -506,10 +506,8 @@ picture source { display: none; }
 }
 .act-buttons { display: flex; gap: var(--space-sm); }
 .act-buttons .btn { min-width: 8.5rem; }
-.act-buttons [aria-pressed="true"], .my-hand [aria-pressed="true"] { color: var(--color-accent-ink); background: var(--color-accent); }
-.my-hand { display: flex; align-items: center; gap: var(--space-sm); }
-.my-hand-name { font-weight: 700; color: var(--color-accent); }
-.my-hand[hidden], .taunts[hidden], .vote[hidden] { display: none; }
+.act-buttons [aria-pressed="true"] { color: var(--color-accent-ink); background: var(--color-accent); }
+.taunts[hidden], .vote[hidden] { display: none; }
 .kick { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs); }
 .kick .field { flex: 0 1 12rem; }
 .sheet {

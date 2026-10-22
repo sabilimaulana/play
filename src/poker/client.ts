@@ -339,6 +339,7 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
     if (view) {
       shown = mask(view)
       renderMine(view)
+      renderTable(view)
     }
   }
   eye.setAttribute("aria-label", "Hide my cards")
@@ -347,12 +348,7 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
   hud.append(at(eye, PEEK))
   felt.append(hud)
 
-  // Your hand so far and the taunt bar: updated every view, never rebuilt mid-click.
-  const mine = el("div", "my-hand")
-  const strength = el("span", "my-hand-name")
-  const hold = el("p", "my-hand-hold")
-  hold.append(el("span", "fine", "Your hand"), strength)
-  mine.append(hold)
+  // The taunt bar: updated every view, never rebuilt mid-click.
   const taunts = el("div", "taunts")
   taunts.setAttribute("aria-label", "Taunt")
   for (const e of EMOTES) {
@@ -384,7 +380,7 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
   // One console under the status: your hand, the decision, then the taunts. Extras sit below it.
   const seat = el("section", "console")
   seat.setAttribute("aria-label", "Your seat")
-  seat.append(mine, controls, taunts)
+  seat.append(controls, taunts)
   ui.side.append(seat, tools)
 
   let view: View | null = null
@@ -604,12 +600,10 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
   const renderMine = (v: View) => {
     const me = v.you === null ? null : v.seats[v.you]!
     const cards = me?.cards.filter((c): c is Card => !!c) ?? []
-    mine.hidden = cards.length === 0
     taunts.hidden = !me
     eye.hidden = cards.length === 0
     eye.innerHTML = hidden ? EYE_SHUT : EYE_OPEN
     eye.setAttribute("aria-pressed", `${hidden}`)
-    strength.textContent = hidden ? "Cards hidden" : me?.folded ? "Folded" : handName([...cards, ...v.board])
   }
 
   // Sound cues come from what changed between two server views.
@@ -700,6 +694,10 @@ export const mountPoker = async (ui: RoomUI, room: string): Promise<void> => {
         timer.append(fill)
         pod.append(timer)
       }
+      // Your hand so far under your plate; nothing while your cards are hidden, folded, or named at showdown.
+      const held = s.cards.filter((c): c is Card => !!c)
+      if (live && i === v.you && !hidden && !s.folded && !s.hand && held.length)
+        pod.append(el("span", "pod-hand", handName([...held, ...v.board])))
       if (s.leaving) pod.append(el("span", "pod-away", "leaving"))
       else if (!s.online) pod.append(el("span", "pod-away", "away"))
       nodes.push(pod)

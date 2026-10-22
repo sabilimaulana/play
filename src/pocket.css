@@ -201,9 +201,6 @@ main { padding-block: var(--space-lg) var(--space-xl); }
 .actions .field-row .field { flex: 0 1 auto; width: 100%; }
 .presets { gap: 6px; }
 .presets .btn { flex: 1; padding-inline: 8px; font-size: .6875rem; }
-.my-hand { gap: var(--space-xs); flex-wrap: wrap; }
-.my-hand .btn { font-size: .6875rem; min-height: 38px; padding: 8px 12px; }
-.my-hand-name { font-size: var(--text-xs); }
 .taunts { gap: 6px; }
 .taunts .btn { padding: 6px; min-width: 40px; min-height: 40px; font-size: 20px; }
 .side-tools { display: flex; flex-wrap: wrap; gap: var(--space-2xs); border-top: 1px solid var(--color-panel-edge); padding-top: var(--space-sm); }
@@ -408,11 +405,6 @@ main { padding-block: var(--space-lg) var(--space-xl); }
 .console:not(:has(> :not([hidden], :empty))) { display: none; }
 .console .btn { white-space: nowrap; }
 .console .actions { padding: 0; gap: var(--space-sm); background: none; border: 0; border-radius: 0; box-shadow: none; }
-.my-hand { justify-content: space-between; flex-wrap: nowrap; gap: var(--space-sm); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--color-panel-edge); }
-.my-hand-hold { display: flex; flex-direction: column; min-width: 0; }
-.my-hand-hold .fine { color: var(--color-ink-2); line-height: 1.4; }
-.my-hand-name { font: 400 28px/1.1 var(--font-display); color: var(--color-accent); overflow-wrap: anywhere; }
-.my-hand .btn { flex: 0 0 auto; }
 /* Hallmark · component: hide-cards toggle · genre: playful · theme: Pocket Arcade (design.md)
  * states: default · hover · focus (global ring) · active · pressed = cards hidden · disabled n/a (always available)
  * loading/error/success n/a: a local toggle with instant result */
@@ -423,6 +415,8 @@ main { padding-block: var(--space-lg) var(--space-xl); }
 .peek:hover { color: var(--color-ink); border-color: var(--color-ink-2); transform: translate(-50%, calc(-50% - 2px)); }
 .peek:active { transform: translate(-50%, calc(-50% + 1px)); }
 .peek[aria-pressed="true"] { color: var(--color-accent-ink); background: var(--color-accent); border-color: var(--color-void); }
+/* Your hand so far, under your own plate (off the felt, so no outline needed). */
+.pod-hand { margin-top: .8cqw; font: 400 clamp(.875rem, 3.2cqw, 1.375rem)/1 var(--font-display); color: var(--color-accent); white-space: nowrap; }
 .console .act-buttons { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-2xs); }
 .console .act-buttons .btn { padding-inline: var(--space-2xs); }
 .console .taunts { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-3xs); padding-top: var(--space-sm); border-top: 1px solid var(--color-panel-edge); }
@@ -447,7 +441,6 @@ main { padding-block: var(--space-lg) var(--space-xl); }
   .room[data-variant="table"] .status { padding: var(--space-sm); }
   .room[data-variant="table"] .status-main { font-size: 26px; }
   .console { padding: var(--space-sm); }
-  .my-hand-name { font-size: 24px; }
 }
 /* Phones: table first, the console directly under it, extras last. While waiting, the invite leads. */
 @media (max-width: 700px) {
